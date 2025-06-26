@@ -21,8 +21,12 @@ spec:
           ports:
             - containerPort: 8081
           env:
-            - name: SPRING_REDIS_HOST
+            - name: SPRING_SESSION_STORE_TYPE
+              value: REDIS
+            - name: SPRING_DATA_REDIS_HOST
               value: "redis"
+            - name: SPRING_DATA_REDIS_PORT
+              value: "6379"
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: /app1
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_REDIRECT_URI

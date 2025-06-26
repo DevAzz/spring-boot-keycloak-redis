@@ -17,12 +17,6 @@ spring:
             token-uri: "http://keycloak:8080/realms/myrealm/protocol/openid-connect/token"
             user-info-uri: "http://keycloak:8080/realms/myrealm/protocol/openid-connect/userinfo"
             jwk-set-uri: "http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs"
-  session:
-    store-type: redis
-  data:
-    redis:
-      host: redis
-      port: 6379
 
 logging:
   level:
