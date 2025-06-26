@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-app
+      replica-id: "1"
+  template:
+    metadata:
+      labels:
+        app: java-app
+        replica-id: "1"
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_REDIS_HOST
+              value: "redis"
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: /app1
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_REDIRECT_URI
+              value: "http://java-app.local/app1/login/oauth2/code/{registrationId}"
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET
+              value: vgeT5m3dFqGozd5gEMqgEiWOB7R6dMFG

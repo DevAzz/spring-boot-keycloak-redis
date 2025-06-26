@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fullname" . }}
-  labels:
-    app: {{ include "fullname" . }}
+  name: java-app-2
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ include "fullname" . }}
+      app: java-app
+      replica-id: "2"
   template:
     metadata:
       labels:
-        app: {{ include "fullname" . }}
+        app: java-app
+        replica-id: "2"
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -23,5 +23,9 @@ spec:
           env:
             - name: SPRING_REDIS_HOST
               value: "redis"
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: /app2
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_REDIRECT_URI
+              value: "http://java-app.local/app2/login/oauth2/code/{registrationId}"
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET
               value: vgeT5m3dFqGozd5gEMqgEiWOB7R6dMFG

@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: app-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
@@ -12,11 +11,18 @@ spec:
     - host: java-app.local
       http:
         paths:
-          - path: /
+          - path: /app1
             pathType: Prefix
             backend:
               service:
-                name: java-app-java-app
+                name: java-app-1
+                port:
+                  number: 8081
+          - path: /app2
+            pathType: Prefix
+            backend:
+              service:
+                name: java-app-2
                 port:
                   number: 8081
     - host: keycloak.local

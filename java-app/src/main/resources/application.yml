@@ -9,7 +9,6 @@ spring:
           keycloak:
             client-id: demo-client
             authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: openid,email,profile
         provider:
           keycloak:
